@@ -1,0 +1,2 @@
+
+print(f"Welcome to Hangman!")
