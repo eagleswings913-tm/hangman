@@ -14,7 +14,6 @@ while True:
         category_number = (input("Choose a category: \n"))
         if category_number in indexes:
             idx = int(category_number)
-            # print(categories[idx-1])
             category = categories[idx-1]
             break
     while True:
@@ -23,7 +22,6 @@ while True:
             break
 
     answer = request_word_from_api(category, word_length)
-    # print(f'Answer: {answer}')
     if answer is not None:
         break
 
@@ -33,6 +31,9 @@ alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N'
 lives_left = 6
 word_to_guess = answer
 word_to_guess_list = ['_' for _ in range(len(word_to_guess))]
+for index, letter in enumerate(word_to_guess):
+    if letter == ' ':
+        word_to_guess_list[index] = " "
 game_play = True
 
 while game_play:
@@ -67,11 +68,10 @@ while game_play:
                 break
 
         if user_guess.lower() in word_to_guess:
-            print(f'{user_guess} is in the word.')
+            position = alphabet.index(user_guess.upper())
+            alphabet[position] = " "
             for index, letter in enumerate(word_to_guess):
-                # print(f'{letter} is at index {index}.')
                 if letter == user_guess:
-                    print(f'{user_guess} is at index {index}.')
                     word_to_guess_list[index] = user_guess.upper()
         else:
             print(f'{user_guess} is not in the word. Try again!')
